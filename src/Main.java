@@ -70,6 +70,82 @@ public class Main {
         }
     }
 
+    // Методы повышенной сложности
+    public static void indexSalary(Employee[] employee) {
+        double index = 0.1;
+        for (Employee emp : employee) {
+            if (emp != null) {
+                emp.setSalary(emp.getSalary() * (1 + index));
+            }
+        }
+    }
+
+    public static String findMinSalaryEmployee(Employee[] employee, int department) {
+        double min = Double.MAX_VALUE;
+        for (Employee emp : employee) {
+            if (emp != null) {
+                if (emp.getDepartment() == department) {
+                    if (emp.getSalary() < min) {
+                        min = emp.getSalary();
+                    }
+                }
+            }
+        }
+        for (Employee emp : employee) {
+            if (emp.getSalary() == min) {
+                return "Сотрудник: " + emp.getEmployeeName()
+                        + ", Отдел: " + emp.getDepartment()
+                        + ", Зарплата: " + emp.getSalary() + ", id: " + emp.getId();
+            }
+        }
+        return null;
+    }
+
+    public static String findMaxSalaryEmployee(Employee[] employee, int department) {
+        double max = Double.MIN_VALUE;
+        for (Employee emp : employee) {
+            if (emp != null) {
+                if (emp.getDepartment() == department) {
+                    if (emp.getSalary() > max) {
+                        max = emp.getSalary();
+                    }
+                }
+            }
+        }
+        for (Employee emp : employee) {
+            if (emp.getSalary() == max) {
+                return "Сотрудник: " + emp.getEmployeeName()
+                        + ", Отдел: " + emp.getDepartment()
+                        + ", Зарплата: " + emp.getSalary() + ", id: " + emp.getId();
+            }
+        }
+        return null;
+    }
+
+    public static double findSalarySum(Employee[] employee, int department) {
+        double sum = 0;
+        for (Employee emp : employee) {
+            if (emp != null) {
+                if (emp.getDepartment() == department) {
+                    sum += emp.getSalary();
+                }
+            }
+        }
+        return sum;
+    }
+
+    public static double findSalaryAverage(Employee[] employee, int department) {
+        int count = 0;
+        for (Employee emp : employee) {
+            if (emp != null) {
+                if (emp.getDepartment() == department) {
+                    count++;
+                }
+            }
+        }
+        return findSalarySum(employee, department) / count;
+    }
+
     public static void main(String[] args) {
         Employee[] employees = new Employee[10];
         employees[0] = new Employee("Иванов Иван Иванович1", 1, 50_000);
@@ -88,5 +164,12 @@ public class Main {
         System.out.println("maxSalaryEmployee(employees) = " + maxSalaryEmployee(employees));
         System.out.println("averageSalary(employees) = " + averageSalary(employees));
         printEmployeesNames(employees);
+        System.out.println("Повышенная сложность");
+        indexSalary(employees);
+        toString(employees);
+        System.out.println("findMinSalaryEmployee(employees, 1) = " + findMinSalaryEmployee(employees, 1));
+        System.out.println("findMaxSalaryEmployee(employees, 1) = " + findMaxSalaryEmployee(employees, 1));
+        System.out.println("findSalarySum(employees, 1) = " + findSalarySum(employees, 1));
+        System.out.println("findSalaryAverage(employees, 1) = " + findSalaryAverage(employees, 1));
     }
 }
