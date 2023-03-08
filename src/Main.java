@@ -146,6 +146,49 @@ public class Main {
         return findSalarySum(employee, department) / count;
     }
 
+    public static void indexSalaryDepartment(Employee[] employee, int department, double index) {
+        for (Employee emp : employee) {
+            if (emp != null) {
+                if (emp.getDepartment() == department) {
+                    emp.setSalary(emp.getSalary() * (1 + index));
+                }
+            }
+        }
+    }
+
+    public static void toStringDepartment(Employee[] employee, int department) {
+        for (Employee emp : employee) {
+            if (emp != null) {
+                if (emp.getDepartment() == department) {
+                    System.out.println("Сотрудник: " + emp.getEmployeeName()
+                            + ", Зарплата: " + emp.getSalary() + ", id: " + emp.getId());
+                }
+            }
+        }
+    }
+
+    public static void printLessSalary(Employee[] employee, double num) {
+        for (Employee emp : employee) {
+            if (emp != null) {
+                if (emp.getSalary() < num) {
+                    System.out.println("Сотрудник: " + emp.getEmployeeName()
+                            + ", Зарплата: " + emp.getSalary() + ", id: " + emp.getId());
+                }
+            }
+        }
+    }
+
+    public static void printMoreSalary(Employee[] employee, double num) {
+        for (Employee emp : employee) {
+            if (emp != null) {
+                if (emp.getSalary() >= num) {
+                    System.out.println("Сотрудник: " + emp.getEmployeeName()
+                            + ", Зарплата: " + emp.getSalary() + ", id: " + emp.getId());
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Employee[] employees = new Employee[10];
         employees[0] = new Employee("Иванов Иван Иванович1", 1, 50_000);
@@ -165,11 +208,17 @@ public class Main {
         System.out.println("averageSalary(employees) = " + averageSalary(employees));
         printEmployeesNames(employees);
         System.out.println("Повышенная сложность");
-        indexSalary(employees);
-        toString(employees);
+//        indexSalary(employees);
+//        toString(employees);
         System.out.println("findMinSalaryEmployee(employees, 1) = " + findMinSalaryEmployee(employees, 1));
         System.out.println("findMaxSalaryEmployee(employees, 1) = " + findMaxSalaryEmployee(employees, 1));
         System.out.println("findSalarySum(employees, 1) = " + findSalarySum(employees, 1));
         System.out.println("findSalaryAverage(employees, 1) = " + findSalaryAverage(employees, 1));
+        indexSalaryDepartment(employees, 1, 0.1);
+        toStringDepartment(employees, 1);
+        System.out.println();
+        printLessSalary(employees, 100_000);
+        System.out.println();
+        printMoreSalary(employees, 100_000);
     }
 }
